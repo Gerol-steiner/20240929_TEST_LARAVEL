@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;    # Authの追加
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\UserController;
@@ -19,3 +20,15 @@ use App\Http\Controllers\UserController;
 Route::get('/', [ContactController::class, 'index']);
 Route::post('/confirm', [ContactController::class, 'confirm']);
 Route::post('/contacts', [ContactController::class, 'store']);
+
+Route::get('/status', function () {
+    return view('status');
+});
+
+Route::post('/logout', function () {
+    Auth::logout();
+    return redirect('/register'); // ログアウト後にリダイレクトする場所
+});
+
+Route::get('/admin', [ContactController::class, 'index'])->middleware('auth');
+# ->middleware('auth')でユーザーが認証されているかを確認。されていなければ/loginにリダイレクト

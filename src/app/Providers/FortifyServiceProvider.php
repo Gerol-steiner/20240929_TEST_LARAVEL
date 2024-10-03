@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
 use Laravel\Fortify\Fortify;
+use Illuminate\Support\Facades\Redirect; // 追加
 use Laravel\Fortify\Contracts\RegisterResponse;   # Fortifyにでユーザー登録後のレスポンスをカスタマイズするためのインターフェース
 
 class FortifyServiceProvider extends ServiceProvider
@@ -39,11 +40,13 @@ class FortifyServiceProvider extends ServiceProvider
                 return view('login');               // ログイン画面のビューを指定
             });
 
-    // ユーザー登録後のリダイレクト先をカスタマイズ
+            // ユーザー登録後のリダイレクト先をカスタマイズ
             $this->app->instance(RegisterResponse::class, new class implements RegisterResponse {
 
                 public function toResponse($request)        // 登録後のレスポンスを定義
                 {
+                    // ユーザーをログアウトさせる(Laravel仕様により登録とともにログインしてしまう。仕様書に従いこの処理を加える）
+                    // auth()->logout();
                     return Redirect::to('/login');      // 登録完了後、ログインページにリダイレクト
                 }
             });

@@ -8,17 +8,13 @@ use App\Models\Category;    # リレーション用
 
 class ContactController extends Controller
 {
-    public function index()
+
+    public function index()     # 問い合わせ画面の表示
     {
         return view('index');
     }
 
-    // public function test()
-    // {
-    //     return view('test');
-    // }
-
-    public function confirm(Request $request)
+    public function confirm(Request $request)   # 確認画面の表示
     {
         // 各部分の電話番号を取得して結合
         $tell = $request->input('phone_part1') . $request->input('phone_part2') . $request->input('phone_part3');
@@ -43,7 +39,7 @@ class ContactController extends Controller
         return view('confirm', compact('contact', 'categoryContent', 'genderName'));
     }
 
-    public function store(Request $request)
+    public function store(Request $request)     # 問い合わせ内容をcontactsテーブルに保尊
     {
         $contact = $request->only(['gender', 'email', 'address', 'building', 'category_id', 'tell', 'detail']);
 
@@ -57,4 +53,12 @@ class ContactController extends Controller
         return view('thanks', compact('contact'));
 
     }
+
+        public function admin(Request $request)
+    {
+        $contacts = Contact::all();
+
+        return view('admin', compact('contacts'));
+    }
+
 }
