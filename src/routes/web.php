@@ -30,5 +30,5 @@ Route::post('/logout', function () {
     return redirect('/register'); // ログアウト後にリダイレクトする場所
 });
 
-Route::get('/admin', [ContactController::class, 'index'])->middleware('auth');
+Route::get('/admin', [ContactController::class, 'admin'])->middleware('auth');
 # ->middleware('auth')でユーザーが認証されているかを確認。されていなければ/loginにリダイレクト

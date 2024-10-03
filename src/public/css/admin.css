@@ -25,3 +25,65 @@
     margin-bottom: 40px;
     text-align: center;
 }
+
+svg.w-5.h-5 {
+    /*paginateメソッドの矢印の大きさ調整のために追加*/
+    width: 30px;
+    height: 30px;
+}
+
+.flex.justify-between.flex-1.sm\:hidden {
+    display: none;
+}
+
+p.text-sm.text-gray-700.leading-5 {
+    display: none;
+}
+
+
+.relative.z-0.inline-flex.shadow-sm.rounded-md {
+    boeder: 1px solid red;
+}
+
+.pagination {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+.pagination a,
+.pagination span {
+    display: block;
+    padding: 8px 12px;
+    /* ボタンのサイズ調整 */
+    border: 1px solid #E0DFDE;
+    /* 外枠 */
+    text-decoration: none;
+    color: #7a614d;
+    /* ボタンの文字色 */
+    background-color: white;
+}
+
+.pagination a:hover {
+    background-color: #f0e6db;
+    /* ホバー時の背景色 */
+    color: #7a614d;
+}
+
+
+
+.pagination a.disabled {
+    pointer-events: none;
+    color: #ccc;
+    /* 無効化されたボタンの色 */
+}
+
+.pagination .page-item.active .page-link {  /*選択中のページ*/
+    background-color: #8B7969;
+    border-color: #8B7969;
+    color: white;
+}

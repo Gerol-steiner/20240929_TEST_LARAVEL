@@ -54,11 +54,32 @@ class ContactController extends Controller
 
     }
 
-        public function admin(Request $request)
+    public function admin(Request $request)
     {
-        $contacts = Contact::all();
+        // $contacts = Contact::with('category')->get();    「Contact::all()」と「各Contactに関連するCategory」を取得
+        $contacts = Contact::with('category')->paginate(7); // ページネーションを使用
+
+        // gender属性を日本語に変換
+        foreach ($contacts as $contact) {
+            $contact->gender_label = $this->getGenderLabel($contact->gender);
+        }
 
         return view('admin', compact('contacts'));
+
+    }
+
+    private function getGenderLabel($gender)
+    {
+        switch ($gender) {
+            case 1:
+                return '男性';
+            case 2:
+                return '女性';
+            case 3:
+                return 'その他';
+            default:
+                return '不明';
+        }
     }
 
 }
