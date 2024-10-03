@@ -1,0 +1,161 @@
+@font-face {
+    font-family: 'Inika';
+    src: url('/fonts/Inika.woff2') format('woff2'),
+        url('/fonts/Inika.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Noto Sans JP';
+    src: url('/fonts/NotoSansJP-Regular.woff2') format('woff2'),
+        url('/fonts/NotoSansJP-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+body {
+    font-family: 'Inika', 'Noto Sans JP', sans-serif;
+    color: #8B7969;
+    background-color: #F1ECE7;
+
+}
+
+.header {
+    border: 1px solid #E0DFDE;
+}
+
+.header__inner {
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    margin: 0 auto;  /* 左右の余白を自動で設定し、中央揃えにする */
+    padding: 20px;
+    background-color: #FFFFFF;
+}
+
+.header__logo {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    text-decoration: none;
+    font-size: 25px;
+    color: #8B7969;
+    font-weight: 500;
+}
+
+.register__button {
+    margin-left: auto;
+}
+
+.register__button-submit {
+    width: 80px;
+    height: 30px;
+    background: #F0F0F0;
+    color: #D9C6B5;
+    border:1px solid #D9C685;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 50px;
+}
+
+.contact-form__content {
+    margin: 0 auto;
+    padding: 10px;
+    max-width: 1230px;
+}
+
+.contact-form__heading {
+    margin-bottom: 50px;
+    text-align: center;
+}
+
+h2 {
+    font-weight: 500;
+}
+
+.form {
+    margin: 0 auto;
+    width: 42%;
+    height:400px;
+    background-color: #FFFFFF;
+    border:1px solid #C5B9B0;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form__inner{
+    width:60%;
+    margin-top: 20px;
+}
+.form__group {
+    display: flex;
+    flex-direction: column;       /* 子要素を縦に並べる */
+    align-items: flex-start;      /* 左端に配置 */
+    margin-bottom: 50px;
+}
+
+.form__group-title {
+    display: flex;
+    align-items: center;
+    width: 60%;
+    height:35px;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+
+.form__group-content {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    gap: 20px;
+}
+
+.form__error {
+    height: 20px;
+    color: #ff0000;
+    text-align: left;
+}
+
+.form__input--text{
+    flex: 1;
+}
+
+
+.form__input--text input {
+    padding: 10px;
+    width: 100%;
+    height: 30px;
+    border: 1px solid #ddd;
+    font-size: 14px;
+    color:#BEB1A6;
+    background-color: #F4F4F4;
+    font-family: 'Inika', 'Noto Sans JP', sans-serif;
+}
+
+.form__button {
+    margin-top: 45px;
+    display: flex;
+    justify-content: center
+}
+
+.form__button-submit {
+    width: 110px;
+    height: 35px;
+    line-height: 35px;    /* ボタンの高さと同じ */
+    border: none;
+    border-radius: 1px;
+    background: #82756A;
+    color: #fff;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+
+}
