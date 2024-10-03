@@ -18,7 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
-            $table->timestamps(); // created_at と updated_at が追加される
+            $table->timestamps(); // created_at と updated_at が追加される。
         });
     }
 
@@ -31,4 +31,5 @@ class CreateUsersTable extends Migration
     {
         Schema::dropIfExists('users');
     }
+
 }
