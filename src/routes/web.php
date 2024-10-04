@@ -32,3 +32,5 @@ Route::post('/logout', function () {
 
 Route::get('/admin', [ContactController::class, 'admin'])->middleware('auth');
 # ->middleware('auth')でユーザーが認証されているかを確認。されていなければ/loginにリダイレクト
+
+Route::delete('/delete', [ContactController::class, 'destroy']);

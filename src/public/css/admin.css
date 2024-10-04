@@ -105,7 +105,7 @@ h2 {
 .pagination span {
     display: flex;
     font-size: 16px;
-    padding: 1px 10px;
+    padding: 2px 10px;
     /* ボタンのサイズ調整 */
     border: 1px solid #E0DFDE;
     /* 外枠 */
@@ -133,3 +133,91 @@ h2 {
     color: white;
 }
 
+/*モーダル_詳細ボタン*/
+.btn-info {
+    background-color: #F4F4F44D;
+    /* 背景色 */
+    color: #D9C6B5;
+    /* 文字色 */
+    padding: 4px 15px;
+    /* パディング */
+    border:1px solid #D9C6B599 ;
+    /* 枠線なし */
+    cursor: pointer;
+    /* カーソル変更 */
+    border-radius: 0;
+}
+
+.btn-info:hover {
+    color:#ffffff;
+    background-color: #8B7969;
+    /* ホバー時の背景色 */
+}
+
+.modal-body {
+    font-family: 'Inika', 'Noto Sans JP', sans-serif;
+    padding:0px 40px;
+    }
+/* テーブル全体のフォント指定 */
+.modal-body .table {
+    color: #7a614d;
+}
+
+/* 日本語部のみ太字に */
+.modal-body th {
+    width: 30%;
+    font-weight: 600;
+}
+
+.modal-body .table {
+    border-collapse: collapse;
+}
+
+.modal-body .table th,
+.modal-body .table td {
+    border: none;
+}
+
+/*モーダルウィンドウの幅*/
+.modal-dialog {
+    max-width: 800px;
+}
+
+/*「X」ボタン*/
+.modal-header .close {
+    color: #8B7969;
+    border-radius: 50%;
+    border: 1px solid #8B7969;
+    padding: 2px 8px;
+    font-weight: 100;
+    margin:6px 8px;
+    position: relative;
+}
+
+.modal-header .close span {
+    position: relative;
+    top: -1px;
+}
+
+.modal-header{
+    border: none;
+}
+
+.modal-footer {
+    border: none;
+    display: flex;
+    justify-content: center;
+}
+.modal-footer .btn-secondary {
+    border-radius: 0;
+    /* 削除ボタンの角を丸めない */
+    background-color: #BA370D;
+    padding: 8px 18px;
+    margin-bottom: 40px;
+    border: none;
+}
+
+.modal-content {
+    border-radius: 0;
+    /* モーダルウィンドウの角を丸めない */
+}
