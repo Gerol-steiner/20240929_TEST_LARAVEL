@@ -59,33 +59,49 @@ class ContactController extends Controller
         // $contacts = Contact::with('category')->get();    「Contact::all()」と「各Contactに関連するCategory」を取得
         $contacts = Contact::with('category')->paginate(7); // ページネーションを使用
 
-        // gender属性を日本語に変換
-        foreach ($contacts as $contact) {
-            $contact->gender_label = $this->getGenderLabel($contact->gender);
-        }
-
         return view('admin', compact('contacts'));
 
     }
 
-    private function getGenderLabel($gender)
-    {
-        switch ($gender) {
-            case 1:
-                return '男性';
-            case 2:
-                return '女性';
-            case 3:
-                return 'その他';
-            default:
-                return '不明';
-        }
-    }
 
     public function destroy(Request $request)
     {
         Contact::find($request->id)->delete();
         return redirect('/admin');
+    }
+
+    public function search(Request $request)
+    {
+        $searchTerm = $request->input('search'); # 検索用inputに入力された文字列を格納
+        $gender = $request->input('gender'); // gender用inputに入力された文字列を格納
+        $categoryId = $request->input('category_id');
+
+        $contacts = Contact::where(function ($query) use ($searchTerm, $gender, $categoryId) {
+
+        // 検索文字列がある場合
+        if (!empty($searchTerm)) {
+            $query->where(function ($query) use ($searchTerm) {
+                $query->where('first_name', 'LIKE', "%{$searchTerm}%")
+                    ->orWhere('last_name', 'LIKE', "%{$searchTerm}%")
+                    ->orWhere('email', 'LIKE', "%{$searchTerm}%");
+    });
+        }
+
+        // genderがある場合
+        if (!empty($gender)) {
+            $query->where('gender', $gender);
+        }
+
+        // category_idがある場合
+        if (!empty($categoryId)) {
+            $query->where('category_id', $categoryId);
+        }
+
+
+        //ページネーションリンクにsearchとgenderの値を含める
+        })->paginate(7)->appends(['search' => $searchTerm, 'gender' => $gender, 'category_id' => $categoryId]);
+
+        return view('admin', compact('contacts'));
     }
 
 }

@@ -92,6 +92,23 @@ h2 {
     border: 2px solid rgb(15, 218, 0);
 }
 
+.form__search {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.form__search-text {
+    border: 2px solid rgb(9, 17, 255);
+}
+
+.form__search-select {
+    border: 2px solid rgb(9, 17, 255);
+}
+
+.form__search-button {
+    border: 2px solid rgb(9, 17, 255);
+}
 
 .pagination {
     display: flex;
