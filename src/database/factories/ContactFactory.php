@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Contact;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Carbon\Carbon; // created_at,updated_をランダムにするため
 
 class ContactFactory extends Factory
 {
@@ -14,6 +15,8 @@ class ContactFactory extends Factory
      */
     public function definition()
     {
+        $randomDate = Carbon::create(2024, 10, 1)->addDays(rand(0, 3));
+
         return [
             'category_id' => $this->faker->numberBetween(1, 5),
             'first_name' => $this->faker->firstName,
@@ -24,8 +27,8 @@ class ContactFactory extends Factory
             'address' => $this->faker->address,
             'building' => $this->faker->secondaryAddress,
             'detail' => $this->faker->text,
-            'created_at' => now(),
-            'updated_at' => now(),
+            'created_at' => $randomDate,
+            'updated_at' => $randomDate,
         ];
     }
 }

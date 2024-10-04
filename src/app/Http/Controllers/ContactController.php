@@ -72,36 +72,48 @@ class ContactController extends Controller
 
     public function search(Request $request)
     {
-        $searchTerm = $request->input('search'); # 検索用inputに入力された文字列を格納
-        $gender = $request->input('gender'); // gender用inputに入力された文字列を格納
-        $categoryId = $request->input('category_id');
+    $searchTerm = $request->input('search');
+    $gender = $request->input('gender');
+    $categoryId = $request->input('category_id');
+    $dateSearch = $request->input('date_search');
 
-        $contacts = Contact::where(function ($query) use ($searchTerm, $gender, $categoryId) {
-
+    $contacts = Contact::where(function ($query) use ($searchTerm, $gender, $categoryId, $dateSearch) {
         // 検索文字列がある場合
         if (!empty($searchTerm)) {
             $query->where(function ($query) use ($searchTerm) {
                 $query->where('first_name', 'LIKE', "%{$searchTerm}%")
                     ->orWhere('last_name', 'LIKE', "%{$searchTerm}%")
                     ->orWhere('email', 'LIKE', "%{$searchTerm}%");
-    });
+            });
         }
 
-        // genderがある場合
-        if (!empty($gender)) {
+        // genderが選択された場合
+        if (!empty($gender) && $gender !== 'all') {
             $query->where('gender', $gender);
         }
 
-        // category_idがある場合
-        if (!empty($categoryId)) {
+        // category_idが選択された場合
+        if (!empty($categoryId) && $categoryId !== 'all') {
             $query->where('category_id', $categoryId);
         }
 
+        // date_searchがある場合
+        if (!empty($dateSearch)) {
+            $query->where(function ($query) use ($dateSearch) {
+                $query->whereDate('created_at', $dateSearch)
+                    ->orWhereDate('updated_at', $dateSearch);
+            });
+        }
+    })->paginate(7)->appends([
+        'search' => $searchTerm,
+        'gender' => $gender,
+        'category_id' => $categoryId,
+        'date_search' => $dateSearch
+    ]);
 
-        //ページネーションリンクにsearchとgenderの値を含める
-        })->paginate(7)->appends(['search' => $searchTerm, 'gender' => $gender, 'category_id' => $categoryId]);
+    return view('admin', compact('contacts'));
+}
 
-        return view('admin', compact('contacts'));
-    }
+
 
 }

@@ -67,21 +67,11 @@ body {
     margin: 0 auto;
     padding: 30px 15px;
     max-width: 70%;
-    border: 1px solid red;
 }
 
 .thanks__heading {
-    margin-bottom: 40px;
+    margin-bottom: 15px;
     text-align: center;
-    border:1px solid red;
-}
-
-h2 {
-    font-weight: 400;
-}
-
-.form {
-    border: 2px solid rgb(92, 0, 178);
 }
 
 .admin__group {
@@ -89,8 +79,38 @@ h2 {
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    border: 2px solid rgb(15, 218, 0);
 }
+
+.admin__group-table {
+    display: flex;
+    align-items: center;
+    border: 1px solid #E0DFDE;
+}
+
+.table thead th {  /*contentsテーブルのヘッダー*/
+    background-color: #8B7969;
+    color: #FFFFFF;
+    text-align: center;
+
+}
+
+.table tbody td {  /*contentsテーブルのセル部*/
+    background-color: #ffffff;
+    color: #8B7969;
+    text-align: center;
+
+}
+
+.form__search-text-input,
+.form__search-select,
+.form__search-date-input,
+.form__search-button {
+    font-family: 'Inika', 'Noto Sans JP', sans-serif;
+    color:#8B7969;
+    font-size: 14px;
+    height: 100%;
+}
+
 
 .form__search {
     display: flex;
@@ -98,16 +118,72 @@ h2 {
     width: 100%;
 }
 
-.form__search-text {
-    border: 2px solid rgb(9, 17, 255);
+.form__search-select select {
+    height:35px;
 }
 
-.form__search-select {
-    border: 2px solid rgb(9, 17, 255);
+.form__search-text input {
+    width:300px;
+    background-color: #F4F4F4;
+    border: 1px solid #E3DED9;
 }
 
-.form__search-button {
-    border: 2px solid rgb(9, 17, 255);
+select[name="gender"] {
+    width:90px;
+    padding-left: 10px;
+    border: 1px solid #E3DED9;
+    background-color: #F4F4F4;
+}
+
+select[name="category_id"] {
+    background-color: #F4F4F4;
+    border: 1px solid #E3DED9;
+    text-indent: 20px;  /* 文字だけを右に寄せる */
+}
+
+
+.form__search-date-input {
+    background-color: #F4F4F4;
+    border:1px solid #E3DED9;
+    padding-left: 10px;
+}
+
+.btn-primary { /* 検索ボタン */
+    width: 85px;
+    background-color: #82756A;
+    font-size:14px;
+    color: #ffffff;
+    height:35px;
+    padding: 7px 10px;
+    border:none;
+    border-radius: 0;
+}
+
+.btn-secondary {
+    width:85px;
+    background-color: #D9C6B5;
+    font-size: 14px;
+    color: #ffffff;
+    height: 35px;
+    margin-left: 20px;
+    border-radius: 0;
+    border:1px solid #D9C6B5;
+}
+
+.btn-tertiary {
+    width: 120px;
+    background-color: #E1DBD6;
+    font-size: 14px;
+    color: #8B7969;
+    height: 32px;
+    margin: 30px 0 20px;
+    border-radius: 0;
+}
+
+.btn-tertiary:hover {
+    background-color: #E1DBD6;
+    font-size: 14px;
+    color: #8B7969;
 }
 
 .pagination {
@@ -153,51 +229,48 @@ h2 {
 /*モーダル_詳細ボタン*/
 .btn-info {
     background-color: #F4F4F44D;
-    /* 背景色 */
     color: #D9C6B5;
-    /* 文字色 */
     padding: 4px 15px;
-    /* パディング */
     border:1px solid #D9C6B599 ;
-    /* 枠線なし */
     cursor: pointer;
-    /* カーソル変更 */
     border-radius: 0;
 }
 
 .btn-info:hover {
-    color:#ffffff;
-    background-color: #8B7969;
-    /* ホバー時の背景色 */
+    background-color: #F4F4F44D;
+    color: #D9C6B5;
+    border: 1px solid #D9C6B599;
+}
+
+.btn-info:active {
+    background-color: #F4F4F44D;
+    color: #D9C6B5;
+    border: 1px solid #D9C6B599;
 }
 
 .modal-body {
+    display:flex;
     font-family: 'Inika', 'Noto Sans JP', sans-serif;
-    padding:0px 40px;
+    padding: 0 60px;
+    border:none;
     }
-/* テーブル全体のフォント指定 */
-.modal-body .table {
-    color: #7a614d;
-}
 
-/* 日本語部のみ太字に */
-.modal-body th {
-    width: 30%;
+.modal-body__attribute {
+    width:90%;
     font-weight: 600;
 }
 
-.modal-body .table {
-    border-collapse: collapse;
-}
-
-.modal-body .table th,
-.modal-body .table td {
-    border: none;
+.modal-body__attribute p,
+.modal-body__content p {
+    margin: 30px 0;
+    /* 上下の余白を調整 */
+    line-height: 1.5;
+    /* 行の高さを調整 */
 }
 
 /*モーダルウィンドウの幅*/
 .modal-dialog {
-    max-width: 800px;
+    max-width: 750px;
 }
 
 /*「X」ボタン*/
@@ -213,11 +286,12 @@ h2 {
 
 .modal-header .close span {
     position: relative;
-    top: -1px;
+    top: -2px; /*〇部の微調整*/
 }
 
 .modal-header{
     border: none;
+    height: 50px;
 }
 
 .modal-footer {
@@ -230,7 +304,8 @@ h2 {
     /* 削除ボタンの角を丸めない */
     background-color: #BA370D;
     padding: 8px 18px;
-    margin-bottom: 40px;
+    margin-top: 20px;
+    margin-bottom: 30px;
     border: none;
 }
 
