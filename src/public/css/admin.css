@@ -1,49 +1,97 @@
+@font-face {
+    font-family: 'Inika';
+    src: url('/fonts/Inika.woff2') format('woff2'),
+        url('/fonts/Inika.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Noto Sans JP';
+    src: url('/fonts/NotoSansJP-Regular.woff2') format('woff2'),
+        url('/fonts/NotoSansJP-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+body {
+    font-family: 'Inika', 'Noto Sans JP', sans-serif;
+    color: #8B7969;
+}
+
 .header {
-    background: #000;
+    background: #ffffff;
+    border:1px solid #E0DFDE;
 }
 
 .header__inner {
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
     margin: 0 auto;
-    padding: 20px 15px;
-    max-width: 1230px;
+    /* 左右の余白を自動で設定し、中央揃えにする */
+    padding: 20px;
+    background-color: #FFFFFF;
 }
 
 .header__logo {
-    color: #fff;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
     text-decoration: none;
-    font-weight: bold;
-    font-size: 24px;
+    font-size: 25px;
+    color: #8B7969;
+    font-weight: 500;
+}
+
+.logout__button {
+    margin-left: auto;
+}
+
+.logout__button-submit {
+    width: 80px;
+    height: 30px;
+    background: #F0F0F0;
+    color: #D9C6B5;
+    border: 1px solid #D9C685;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 50px;
 }
 
 .thanks__content {
     margin: 0 auto;
     padding: 30px 15px;
-    max-width: 1230px;
+    max-width: 70%;
+    border: 1px solid red;
 }
 
 .thanks__heading {
     margin-bottom: 40px;
     text-align: center;
+    border:1px solid red;
 }
 
-svg.w-5.h-5 {
-    /*paginateメソッドの矢印の大きさ調整のために追加*/
-    width: 30px;
-    height: 30px;
+h2 {
+    font-weight: 400;
 }
 
-.flex.justify-between.flex-1.sm\:hidden {
-    display: none;
+.form {
+    border: 2px solid rgb(92, 0, 178);
 }
 
-p.text-sm.text-gray-700.leading-5 {
-    display: none;
+.admin__group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    border: 2px solid rgb(15, 218, 0);
 }
 
-
-.relative.z-0.inline-flex.shadow-sm.rounded-md {
-    boeder: 1px solid red;
-}
 
 .pagination {
     display: flex;
@@ -53,12 +101,11 @@ p.text-sm.text-gray-700.leading-5 {
     align-items: center;
 }
 
-
-
 .pagination a,
 .pagination span {
-    display: block;
-    padding: 8px 12px;
+    display: flex;
+    font-size: 16px;
+    padding: 1px 10px;
     /* ボタンのサイズ調整 */
     border: 1px solid #E0DFDE;
     /* 外枠 */
@@ -74,11 +121,9 @@ p.text-sm.text-gray-700.leading-5 {
     color: #7a614d;
 }
 
-
-
 .pagination a.disabled {
     pointer-events: none;
-    color: #ccc;
+    color: #281f1f;
     /* 無効化されたボタンの色 */
 }
 
@@ -87,3 +132,4 @@ p.text-sm.text-gray-700.leading-5 {
     border-color: #8B7969;
     color: white;
 }
+
