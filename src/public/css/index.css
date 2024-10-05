@@ -16,7 +16,7 @@
 
 body {
     font-family: 'Inika', 'Noto Sans JP', sans-serif;
-    color: #8B7969;
+    color: #8b6a69;
 }
 
 .header {
@@ -28,7 +28,6 @@ body {
     margin: 0 auto;  /* 左右の余白を自動で設定し、中央揃えにする */
     padding: 15px;
     max-width: 1230px;
-    border: 2px solid rgb(250, 12, 190);
 }
 
 .header__logo {
@@ -42,29 +41,42 @@ body {
     margin: 0 auto;
     padding: 10px;
     max-width: 1230px;
-    border: 2px solid rgb(250, 12, 190);
 }
 
-.contact-form__heading {
+.tell-wrapper {
+        display: flex;
+}
+
+.error-message {
+    display:flex;
+    text-align: left;
+    color: red;
+    font-size: 12px;
+    min-height: 18px;
+    /* エラーメッセージの高さを確保 */
+    align-items: center;
+}
+
+s.contact-form__heading {
     margin-bottom: 30px;
     text-align: center;
 }
 
 h2 {
     font-weight: 500;
+    text-align: center;
+    margin: 30px;
 }
 
 .form {
     margin: 0 auto;
-    width: 64%;
-    border: 2px solid rgb(35, 0, 233);
+    width: 75%;
 }
 
 .form__group {
     display: flex;
     justify-content: space-between;
     margin-bottom: 15px;
-    border: 3px solid rgb(255, 187, 0);
 }
 
 .form__group-title {
@@ -72,16 +84,23 @@ h2 {
     align-items: center;
     width: 30%;
     height:35px;
-    border: 3px solid rgb(13, 247, 149);
 }
 
 .form__group-content {
     display: flex;
     justify-content: space-between;
-    width: 60%;
-    gap: 20px;
-    border: 3px solid red;
+    width: 65%;
+    margin-bottom: 20px;
 }
+
+.first-item {   /*nameに対するgap*/
+    gap: 20px;
+}
+
+.fourth-item { /*tellに対するgap*/
+    gap: 7px;
+}
+
 
 .form__label--required {
     padding: 4px 6px;
@@ -109,10 +128,9 @@ h2 {
     border: 1px solid #ddd;
     border-radius: 3px;
     font-size: 14px;
-    color:#BEB1A6;
+    color:#8B7969;
     background-color: #F4F4F4;
     font-family: 'Inika', 'Noto Sans JP', sans-serif;
-    border: 1px solid blue;
 
 }
 
@@ -142,7 +160,7 @@ input[type="tel"] {
 
 
 .form__input--textarea textarea {
-    height: 120px;
+    height: 80px;
 }
 
 .form__radio-container {
@@ -162,8 +180,8 @@ input[type="tel"] {
 }
 
 .form__input--text select {
-    color: #BEB1A6;
-    padding: 5px;
+    color: #ff2b05;
+    padding: 5px 12px;
     width: 60%;
     height: 30px;
     border: 1px solid #ddd;
@@ -182,8 +200,12 @@ input[type="tel"] {
             padding-right: 1.5em;
 }
 
+textarea {
+    resize: none;
+}
+
 .form__button {
-    margin-top: 25px;
+    margin-top: 45px;
     display: flex;
     justify-content: center
 }

@@ -21,10 +21,6 @@ Route::get('/', [ContactController::class, 'index']);
 Route::post('/confirm', [ContactController::class, 'confirm']);
 Route::post('/contacts', [ContactController::class, 'store']);
 
-Route::get('/status', function () {
-    return view('status');
-});
-
 Route::post('/logout', function () {
     Auth::logout();
     return redirect('/register'); // ログアウト後にリダイレクトする場所

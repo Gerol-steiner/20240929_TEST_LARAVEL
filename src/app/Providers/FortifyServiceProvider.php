@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Redirect;
 use Laravel\Fortify\Contracts\RegisterResponse;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\LoginRequest;     # ログイン時バリデーション用のフォームリクエスト
+use Laravel\Fortify\Http\Controllers\AuthenticatedSessionController;  # Laravel Fortifyで認証セッションを管理するためのコントローラー
 
 class FortifyServiceProvider extends ServiceProvider
 {
@@ -20,7 +22,11 @@ class FortifyServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        // Fortifyが使用するLoginRequestをカスタムのLoginRequestにバインド
+        $this->app->bind(
+            \Laravel\Fortify\Http\Requests\LoginRequest::class,
+            \App\Http\Requests\LoginRequest::class
+        );
     }
 
     /**
@@ -42,7 +48,7 @@ class FortifyServiceProvider extends ServiceProvider
         });
 
         // カスタム認証ロジック
-        Fortify::authenticateUsing(function (Request $request) {
+        Fortify::authenticateUsing(function (\App\Http\Requests\LoginRequest $request) {
             $user = User::where('email', $request->email)->first();
 
             if ($user && Hash::check($request->password, $user->password)) {

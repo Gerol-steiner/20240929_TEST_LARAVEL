@@ -31,15 +31,22 @@
                         <span class="form__label--item">お名前</span>
                         <span class="form__label--required">※</span>
                     </div>
-                    <div class="form__group-content">
+                    <div class="form__group-content first-item">
                         <div class="form__input--text">
                             <input type="text" name="first_name" placeholder="例: 山田" />
+                        @if ($errors->has('first_name'))
+                            @foreach ($errors->get('first_name') as $error)
+                                <div class="error-message">{{ $error }}</div>
+                            @endforeach
+                        @endif
                         </div>
                         <div class="form__input--text">
                             <input type="text" name="last_name" placeholder="例: 太郎" />
-                        </div>
-                        <div class="form__error">
-                            <!--バリデーション機能を実装したら記述します。-->
+                        @if ($errors->has('last_name'))
+                            @foreach ($errors->get('last_name') as $error)
+                                <div class="error-message">{{ $error }}</div>
+                            @endforeach
+                        @endif
                         </div>
                     </div>
                 </div>
@@ -52,7 +59,8 @@
                     <div class="form__group-content">
                         <div class="form__radio-container">
                             <div class="form__radio-option">
-                                <input type="radio" id="gender-male" name="gender" value="1">
+                                <!--デフォルトで選択状態-->
+                                <input type="radio" id="gender-male" name="gender" value="1" checked>
                                 <label for="gender-male">男性</label>
                             </div>
                             <div class="form__radio-option">
@@ -63,6 +71,11 @@
                                 <input type="radio" id="gender-other" name="gender" value="3">
                                 <label for="gender-other">その他</label>
                             </div>
+                            @if ($errors->has('gender'))
+                                @foreach ($errors->get('gender') as $error)
+                                    <div class="error-message">{{ $error }}</div>
+                                @endforeach
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -75,9 +88,11 @@
                     <div class="form__group-content">
                         <div class="form__input--text">
                             <input type="email" name="email" placeholder="test@example.com" />
-                        </div>
-                        <div class="form__error">
-                            <!--バリデーション機能を実装したら記述します。-->
+                            @if ($errors->has('email'))
+                                @foreach ($errors->get('email') as $error)
+                                    <div class="error-message">{{ $error }}</div>
+                                @endforeach
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -87,20 +102,38 @@
                         <span class="form__label--item">電話番号</span>
                         <span class="form__label--required">※</span>
                     </div>
-                    <div class="form__group-content">
+                    <div class="form__group-content fourth-item">
                         <div class="form__input--text">
                             <input type="tel" name="phone_part1" placeholder="080" maxlength="3" />
+                            @if ($errors->has('phone_part1'))
+                                @foreach ($errors->get('phone_part1') as $error)
+                                    <div class="error-message">
+                                        {{ $error }}
+                                    </div>
+                                @endforeach
+                            @endif
                         </div>
                         <span class="separator"> - </span>
                         <div class="form__input--text">
                             <input type="tel" name="phone_part2" placeholder="1234" maxlength="4" />
+                            @if ($errors->has('phone_part2'))
+                                @foreach ($errors->get('phone_part2') as $error)
+                                    <div class="error-message">
+                                        {{ $error }}
+                                    </div>
+                                @endforeach
+                            @endif
                         </div>
                         <span class="separator">-</span>
                         <div class="form__input--text">
                             <input type="tel" name="phone_part3" placeholder="5678" maxlength="4" />
-                        </div>
-                        <div class="form__error">
-                            <!--バリデーション機能を実装したら記述します。-->
+                            @if ($errors->has('phone_part3'))
+                                @foreach ($errors->get('phone_part3') as $error)
+                                    <div class="error-message">
+                                        {{ $error }}
+                                    </div>
+                                @endforeach
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -113,9 +146,11 @@
                     <div class="form__group-content">
                         <div class="form__input--text">
                             <input type="name" name="address" placeholder="例: 東京都渋谷区千駄ヶ谷1-2-3" />
-                        </div>
-                        <div class="form__error">
-                            <!--バリデーション機能を実装したら記述します。-->
+                            @if ($errors->has('address'))
+                                @foreach ($errors->get('address') as $error)
+                                    <div class="error-message">{{ $error }}</div>
+                                @endforeach
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -128,9 +163,6 @@
                         <div class="form__input--text">
                             <input type="name" name="building" placeholder="例: 千駄ヶ谷マンション101" />
                         </div>
-                        <div class="form__error">
-                            <!--バリデーション機能を実装したら記述します。-->
-                        </div>
                     </div>
                 </div>
 
@@ -141,17 +173,19 @@
                     </div>
                     <div class="form__group-content">
                         <div class="form__input--text">
-                            <select name="category_id">
-                                <option value="">選択してください</option>
+                            <select name="category_id" id="categorySelect"> <!---最下部のJavascript参照-->
+                                <option value="" class="default-option" disabled selected>選択してください</option>
                                 <option value="1">商品のお届けについて</option>
                                 <option value="2">商品の交換について</option>
                                 <option value="3">商品トラブル</option>
                                 <option value="4">ショップへのお問い合わせ</option>
                                 <option value="5">その他</option>
                             </select>
-                        </div>
-                        <div class="form__error">
-                            <!--バリデーション機能を実装したら記述します。-->
+                            @if ($errors->has('category_id'))
+                                @foreach ($errors->get('category_id') as $error)
+                                    <div class="error-message">{{ $error }}</div>
+                                @endforeach
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -164,6 +198,11 @@
                     <div class="form__group-content">
                         <div class="form__input--textarea">
                             <textarea name="detail" placeholder="お問い合わせ内容をご記載ください"></textarea>
+                            @if ($errors->has('detail'))
+                                @foreach ($errors->get('detail') as $error)
+                                    <div class="error-message">{{ $error }}</div>
+                                @endforeach
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -173,6 +212,21 @@
             </form>
         </div>
     </main>
+
+    <script>
+        const selectElement = document.getElementById('categorySelect');
+
+        // 初期状態の色を設定
+        selectElement.style.color = 'gray';
+
+        selectElement.addEventListener('change', function() {
+            if (this.value === "") {
+                this.style.color = 'red';
+            } else {
+                this.style.color = '#8B7969'; //選択後の色
+            }
+        });
+    </script>
 </body>
 
 </html>

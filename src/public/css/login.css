@@ -112,8 +112,6 @@ h2 {
 
 
 .form__group-content {
-    display: flex;
-    justify-content: space-between;
     width: 100%;
     gap: 20px;
 }
@@ -138,6 +136,15 @@ h2 {
     color:#BEB1A6;
     background-color: #F4F4F4;
     font-family: 'Inika', 'Noto Sans JP', sans-serif;
+}
+
+.error-message {
+    display: block;
+    text-align: right;
+    color: red;
+    font-size: 12px;
+    min-height: 18px;
+    /* エラーメッセージの高さを確保 */
 }
 
 .form__button {

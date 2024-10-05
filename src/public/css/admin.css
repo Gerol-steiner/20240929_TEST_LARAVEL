@@ -132,7 +132,7 @@ tr:last-child td {
     width:300px;
     background-color: #F4F4F4;
     border: 1px solid #E3DED9;
-    /* padding-left: 5px; */
+    padding-left: 10px;
 }
 
 select[name="gender"] {

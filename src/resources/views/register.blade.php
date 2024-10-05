@@ -40,9 +40,11 @@
                         <div class="form__group-content">
                             <div class="form__input--text">
                                 <input type="text" name="name" placeholder="例: 山田 太郎" />
-                                <span class="error-message">
-                                    {{ $errors->has('name') ? $errors->first('name') : '' }}
-                                </span>
+                                @if ($errors->has('name'))
+                                    @foreach ($errors->get('name') as $error)
+                                        <div class="error-message">{{ $error }}</div>
+                                    @endforeach
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -54,9 +56,11 @@
                         <div class="form__group-content">
                             <div class="form__input--text">
                                 <input type="email" name="email" placeholder="例: test@example.com" />
-                                <span class="error-message">
-                                    {{ $errors->has('email') ? $errors->first('email') : '' }}
-                                </span>
+                                @if ($errors->has('email'))
+                                    @foreach ($errors->get('email') as $error)
+                                        <div class="error-message">{{ $error }}</div>
+                                    @endforeach
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -68,9 +72,11 @@
                         <div class="form__group-content">
                             <div class="form__input--text">
                                 <input type="password" name="password" placeholder="例: coachtech1106" />
-                                <span class="error-message">
-                                    {{ $errors->has('password') ? $errors->first('password') : '' }}
-                                </span>
+                                @if ($errors->has('password'))
+                                    @foreach ($errors->get('password') as $error)
+                                        <div class="error-message">{{ $error }}</div>
+                                    @endforeach
+                                @endif
                             </div>
                         </div>
                     </div>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Contact;
 use App\Models\Category;
+use App\Http\Requests\ContactRequest; // contactからcofirm呼び出し時のフォームリクエスト
 use Illuminate\Support\Facades\Response;    # csvへエクスポートに使用（exportメソッド）
 
 class ContactController extends Controller
@@ -14,7 +15,7 @@ class ContactController extends Controller
         return view('index');
     }
 
-    public function confirm(Request $request)  // 確認画面の表示
+    public function confirm(ContactRequest $request)  // 確認画面の表示
     {
         $tell = $request->input('phone_part1') . $request->input('phone_part2') . $request->input('phone_part3');
 

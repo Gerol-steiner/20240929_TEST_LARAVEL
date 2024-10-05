@@ -42,9 +42,11 @@
                             <div class="form__input--text">
                                 <input type="email" name="email" placeholder="例: test@example.com" />
                             </div>
-                            <div class="form__error">
-                                <!--バリデーション機能を実装したら記述します。-->
-                            </div>
+                                @if ($errors->has('email'))
+                                    @foreach ($errors->get('email') as $error)
+                                        <div class="error-message">{{ $error }}</div>
+                                    @endforeach
+                                @endif
                         </div>
                     </div>
 
@@ -56,9 +58,11 @@
                             <div class="form__input--text">
                                 <input type="password" name="password" placeholder="例: coachtech1106" />
                             </div>
-                            <div class="form__error">
-                                <!--バリデーション機能を実装したら記述します。-->
-                            </div>
+                                @if ($errors->has('password'))
+                                    @foreach ($errors->get('password') as $error)
+                                        <div class="error-message">{{ $error }}</div>
+                                    @endforeach
+                                @endif
                         </div>
                     </div>
 
