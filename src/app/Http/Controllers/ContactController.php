@@ -4,46 +4,42 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Contact;
-use App\Models\Category;    # リレーション用
+use App\Models\Category;
+use Illuminate\Support\Facades\Response;    # csvへエクスポートに使用（exportメソッド）
 
 class ContactController extends Controller
 {
-
-    public function index()     # 問い合わせ画面の表示
+    public function index()  // 問い合わせ画面の表示
     {
         return view('index');
     }
 
-    public function confirm(Request $request)   # 確認画面の表示
+    public function confirm(Request $request)  // 確認画面の表示
     {
-        // 各部分の電話番号を取得して結合
         $tell = $request->input('phone_part1') . $request->input('phone_part2') . $request->input('phone_part3');
 
         $contact = $request->only(['first_name', 'last_name', 'gender', 'email', 'address', 'building', 'category_id', 'detail']);
         $contact['tell'] = $tell;
         $contact['name'] = $contact['first_name'] . ' ' . $contact['last_name'];
 
-        // genderの数字と名前の対応配列
         $genders = [
             1 => '男性',
             2 => '女性',
             3 => 'その他',
         ];
 
-        $genderNum = $request->input('gender');       // POSTされたgender(数字)を取得
-        $genderName = $genders[$genderNum] ?? '不明';     // 対応するカテゴリー名を取得
+        $genderNum = $request->input('gender');
+        $genderName = $genders[$genderNum] ?? '不明';
 
-        // category_idに対応するcontentをリレーションを使って取得
         $categoryContent = Category::find($contact['category_id'])->content ?? '不明';
 
         return view('confirm', compact('contact', 'categoryContent', 'genderName'));
     }
 
-    public function store(Request $request)     # 問い合わせ内容をcontactsテーブルに保尊
+    public function store(Request $request)  // 問い合わせ内容を保存
     {
         $contact = $request->only(['gender', 'email', 'address', 'building', 'category_id', 'tell', 'detail']);
 
-        // 'name'を分割してfirst_nameとlast_nameを取得
         $nameParts = explode(' ', $request->input('name'), 2);
         $contact['first_name'] = $nameParts[0];
         $contact['last_name'] = isset($nameParts[1]) ? $nameParts[1] : '';
@@ -51,69 +47,73 @@ class ContactController extends Controller
         Contact::create($contact);
 
         return view('thanks', compact('contact'));
-
     }
 
-    public function admin(Request $request)
+    public function admin(Request $request)     # contactsテーブルを7件ずつadmin画面に表示
     {
-        // $contacts = Contact::with('category')->get();    「Contact::all()」と「各Contactに関連するCategory」を取得
-        $contacts = Contact::with('category')->paginate(7); // ページネーションを使用
-
+        $contacts = $this->buildSearchQuery($request)->paginate(7);
         return view('admin', compact('contacts'));
-
     }
 
-
-    public function destroy(Request $request)
+    public function destroy(Request $request)   # admin画面モーダルウィンドウからcontactsを1件削除
     {
         Contact::find($request->id)->delete();
         return redirect('/admin');
     }
 
+    // 共通の検索クエリを構築するメソッド
+    public function buildSearchQuery(Request $request)
+    {
+        $query = Contact::with('category');
+
+        if ($request->filled('search')) {
+            $query->where(function ($q) use ($request) {
+                $q->where('first_name', 'like', '%' . $request->search . '%')
+                    ->orWhere('last_name', 'like', '%' . $request->search . '%')
+                    ->orWhere('email', 'like', '%' . $request->search . '%');
+            });
+        }
+
+        if ($request->filled('gender') && $request->gender !== 'all') {
+            $query->where('gender', $request->gender);
+        }
+
+        if ($request->filled('category_id') && $request->category_id !== 'all') {
+            $query->where('category_id', $request->category_id);
+        }
+
+        if ($request->filled('date_search')) {
+            $query->whereDate('created_at', $request->date_search);
+        }
+
+        return $query;
+    }
+
     public function search(Request $request)
     {
-    $searchTerm = $request->input('search');
-    $gender = $request->input('gender');
-    $categoryId = $request->input('category_id');
-    $dateSearch = $request->input('date_search');
+        $contacts = $this->buildSearchQuery($request)
+            ->paginate(7)
+            ->appends($request->query());  // ページネーションのリンクに検索条件を保持
 
-    $contacts = Contact::where(function ($query) use ($searchTerm, $gender, $categoryId, $dateSearch) {
-        // 検索文字列がある場合
-        if (!empty($searchTerm)) {
-            $query->where(function ($query) use ($searchTerm) {
-                $query->where('first_name', 'LIKE', "%{$searchTerm}%")
-                    ->orWhere('last_name', 'LIKE', "%{$searchTerm}%")
-                    ->orWhere('email', 'LIKE', "%{$searchTerm}%");
-            });
+        return view('admin', compact('contacts'));
+    }
+
+    public function export(Request $request)
+    {
+        $contacts = $this->buildSearchQuery($request)->get();
+
+        // CSVデータの生成
+        $csvData = "お名前,性別,メールアドレス,お問い合わせの種類\n";
+        foreach ($contacts as $contact) {
+            $csvData .= "{$contact->first_name} {$contact->last_name},{$contact->gender_label},{$contact->email},{$contact->category->content}\n";
         }
 
-        // genderが選択された場合
-        if (!empty($gender) && $gender !== 'all') {
-            $query->where('gender', $gender);
-        }
+        // CSVファイル名
+        $fileName = 'contacts_' . date('Ymd_His') . '.csv';
 
-        // category_idが選択された場合
-        if (!empty($categoryId) && $categoryId !== 'all') {
-            $query->where('category_id', $categoryId);
-        }
-
-        // date_searchがある場合
-        if (!empty($dateSearch)) {
-            $query->where(function ($query) use ($dateSearch) {
-                $query->whereDate('created_at', $dateSearch)
-                    ->orWhereDate('updated_at', $dateSearch);
-            });
-        }
-    })->paginate(7)->appends([
-        'search' => $searchTerm,
-        'gender' => $gender,
-        'category_id' => $categoryId,
-        'date_search' => $dateSearch
-    ]);
-
-    return view('admin', compact('contacts'));
-}
-
-
-
+        return Response::make($csvData, 200, [
+            'Content-Type' => 'text/csv',
+            'Content-Disposition' => "attachment; filename=\"$fileName\"",
+        ]);
+    }
 }

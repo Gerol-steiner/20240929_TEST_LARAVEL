@@ -72,7 +72,7 @@
 
             <div class="admin__group">
                 <div>
-                    <button  class="btn btn-tertiary">エクスポート</button>
+                    <a href="{{ route('export', request()->query()) }}" class="btn btn-tertiary">エクスポート</a>
                 </div>
                 <div>
                     {{ $contacts->links() }} <!-- ページネーションリンクを表示 -->
@@ -125,7 +125,7 @@
                         <p>お問い合わせの種類</p>
                         <p>お問い合わせ内容</p>
                     </div>
-                    <div class="modal-body__attribute">
+                    <div class="modal-body__content">
                         <p>{{ $contact->first_name }} {{ $contact->last_name }}</p>
                         <p>{{ $contact->gender_label }}</p>
                         <p>{{ $contact->tell }}</p>

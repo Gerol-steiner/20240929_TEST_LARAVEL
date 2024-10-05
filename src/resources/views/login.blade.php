@@ -30,7 +30,7 @@
             <div class="contact-form__heading">
                 <h2>Login</h2>
             </div>
-            <form class="form" action="/admin" method="post">
+            <form class="form" action="/login" method="post">
                 @csrf
                 <div class="form__inner">
 
@@ -40,7 +40,7 @@
                         </div>
                         <div class="form__group-content">
                             <div class="form__input--text">
-                                <input type="email" name="address" placeholder="例: test@example.com" />
+                                <input type="email" name="email" placeholder="例: test@example.com" />
                             </div>
                             <div class="form__error">
                                 <!--バリデーション機能を実装したら記述します。-->
@@ -54,7 +54,7 @@
                         </div>
                         <div class="form__group-content">
                             <div class="form__input--text">
-                                <input type="password" name="address" placeholder="例: coachtech1106" />
+                                <input type="password" name="password" placeholder="例: coachtech1106" />
                             </div>
                             <div class="form__error">
                                 <!--バリデーション機能を実装したら記述します。-->

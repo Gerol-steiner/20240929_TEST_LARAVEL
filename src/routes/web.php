@@ -30,9 +30,19 @@ Route::post('/logout', function () {
     return redirect('/register'); // ログアウト後にリダイレクトする場所
 });
 
-Route::get('/admin', [ContactController::class, 'admin'])->middleware('auth');
-# ->middleware('auth')でユーザーが認証されているかを確認。されていなければ/loginにリダイレクト
 
+Route::get('/admin', function () {
+    return view('admin');
+})->middleware('auth');
+
+# login画面からの/loginのpost→
+Route::get('/admin', [ContactController::class, 'admin'])->middleware('auth');
+
+# adminモーダルからcontactsレコード１件削除
 Route::delete('/delete', [ContactController::class, 'destroy']);
 
+# adminでcontactsの検索
 Route::get('/search', [ContactController::class, 'search']);
+
+# adminからCSVエクスポート
+Route::get('export', [ContactController::class, 'export'])->name('export');
