@@ -42,3 +42,11 @@ Route::get('/search', [ContactController::class, 'search']);
 
 # adminからCSVエクスポート
 Route::get('export', [ContactController::class, 'export'])->name('export');
+
+# confirmからindexに戻る
+Route::post('/back', [ContactController::class, 'back']);
+
+# デバッグ用！！
+Route::get('/thanks', function () {
+    return view('thanks');
+});

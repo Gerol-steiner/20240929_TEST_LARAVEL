@@ -12,29 +12,36 @@
 
 <body>
     <header class="header">
-        <div class="header__inner">
-        <a class="header__logo" href="/">
-            Contact Form
-        </a>
-        </div>
     </header>
-
     <main>
-        <div class="thanks__content">
-            <div class="thanks__heading">
-                <h2>お問い合わせありがとうございます</h2>
-                <ul>
-                    @foreach($contact as $key => $value)
-                        <li>{{ $key }}: {{ $value }}</li>
-                    @endforeach
-                </ul>
-            </div>
+
+
+
+
             <form class="thanks__form" action="/" method="get">
+
+
+<div class="text-container">
+    <span class="base-text">お問い合わせありがとうございました</span>
+    <span class="overlay-text">Thank you</span>
+
+
                 <div class="thanks__button">
-                    <button type="submit">Home</button>
+                    <button type="submit">HOME</button>
                 </div>
+
+</div>
+
+
+
+
+
+
+
+
+
             </form>
-        </div>
+
     </main>
 </body>
 

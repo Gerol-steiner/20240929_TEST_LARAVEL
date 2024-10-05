@@ -14,7 +14,7 @@
     <header class="header">
         <div class="header__inner">
         <a class="header__logo" href="/">
-            Contact Form
+            FashionablyLate
         </a>
         </div>
     </header>
@@ -22,10 +22,19 @@
     <main>
         <div class="confirm__content">
         <div class="confirm__heading">
-            <h2>お問い合わせ内容確認</h2>
+            <h2>Confirm</h2>
         </div>
-        <form class="form" action="/contacts" method="post">
+
+        <!--▼idでscriptのgoBack関数と紐づける-->
+        <form class="form" action="/contacts" method="post" id="contactForm">
             @csrf
+            <!--本ビューでは使わないが、indexに戻った時用に保存-->
+            <input type="hidden" name="first_name" value="{{ old('first_name', $contact['first_name']) }}">
+            <input type="hidden" name="last_name" value="{{ old('last_name', $contact['last_name']) }}">
+            <input type="hidden" name="phone_part1" value="{{ old('phone_part1', $contact['phone_part1']) }}">
+            <input type="hidden" name="phone_part2" value="{{ old('phone_part2', $contact['phone_part2']) }}">
+            <input type="hidden" name="phone_part3" value="{{ old('phone_part3', $contact['phone_part3']) }}">
+            <input type="hidden" name="building" value="{{ old('building', $contact['building']) }}">
             <div class="confirm-table">
             <table class="confirm-table__inner">
                 <tr class="confirm-table__row">
@@ -82,10 +91,21 @@
             </div>
             <div class="form__button">
                 <button class="form__button-submit" type="submit">送信</button>
+                <button class="form__button-back" type="button" onclick="goBack()">修正</button> <!-- 修正ボタンにクリックイベント追加 -->
             </div>
         </form>
         </div>
     </main>
+
+    <script>
+        function goBack() {
+            const form = document.getElementById('contactForm');
+            form.action = '/back'; // /gobackにactionを変更
+            form.method = 'post'; // methodをpostに設定
+            form.submit(); // フォームを送信
+        }
+    </script>
+
     </body>
 
 </html>

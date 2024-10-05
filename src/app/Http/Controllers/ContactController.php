@@ -17,10 +17,13 @@ class ContactController extends Controller
 
     public function confirm(ContactRequest $request)  // 確認画面の表示
     {
-        $tell = $request->input('phone_part1') . $request->input('phone_part2') . $request->input('phone_part3');
+        $contact = $request->only([
+            'first_name', 'last_name', 'gender', 'email',
+            'address', 'building', 'category_id', 'detail',
+            'phone_part1', 'phone_part2', 'phone_part3'
+        ]);
 
-        $contact = $request->only(['first_name', 'last_name', 'gender', 'email', 'address', 'building', 'category_id', 'detail']);
-        $contact['tell'] = $tell;
+        $contact['tell'] = $contact['phone_part1'] . $contact['phone_part2'] . $contact['phone_part3'];
         $contact['name'] = $contact['first_name'] . ' ' . $contact['last_name'];
 
         $genders = [
@@ -33,7 +36,6 @@ class ContactController extends Controller
         $genderName = $genders[$genderNum] ?? '不明';
 
         $categoryContent = Category::find($contact['category_id'])->content ?? '不明';
-
         return view('confirm', compact('contact', 'categoryContent', 'genderName'));
     }
 
@@ -117,4 +119,17 @@ class ContactController extends Controller
             'Content-Disposition' => "attachment; filename=\"$fileName\"",
         ]);
     }
+    public function back(Request $request)    # confirm画面からindex画面に戻る
+    {
+
+    // セッションに保存してリダイレクト
+    return redirect('/')->with($request->only([
+        'first_name', 'last_name', 'gender', 'email',
+        'phone_part1', 'phone_part2', 'phone_part3',
+        'address', 'category_id', 'building', 'detail'
+    ]));
 }
+
+}
+
+

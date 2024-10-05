@@ -1,27 +1,84 @@
-.header {
-    background: #000;
+@font-face {
+    font-family: 'Inika';
+    src: url('/fonts/Inika.woff2') format('woff2'),
+        url('/fonts/Inika.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
 }
 
-.header__inner {
+@font-face {
+    font-family: 'Noto Sans JP';
+    src: url('/fonts/NotoSansJP-Regular.woff2') format('woff2'),
+        url('/fonts/NotoSansJP-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+body {
+    font-family: 'Inika', 'Noto Sans JP', sans-serif;
+    color: #8b6a69;
+}
+
+
+.text-container {
+    width:100%;
+    display: flex;
+    flex-direction: column;
+    /* 垂直方向に並べる */
+    justify-content: center;
+    /* 水平方向に中央 */
+    align-items: center;
+    /* 垂直方向に中央 */
+    height: 100vh;
+    /* 画面全体の高さ */
+    position: relative;
     margin: 0 auto;
-    padding: 20px 15px;
-    max-width: 1230px;
+    /* 画面中央に配置 */
+    border:none;
 }
 
-.header__logo {
+.base-text {
+    font-size: 36px;
+    font-weight: 900;
+    color: #8B7969;
+    z-index: 1;
+        /* 前面に表示 */
+}
+
+.overlay-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -60%);
+    font-size: 420px;
+    color: ##8B7969;
+    pointer-events: none;  /* クリックを無効化（必要に応じて） */
+    opacity: 0.05;
+    white-space: nowrap;
+    /* 折り返しを防ぐ */
+    z-index: 0;
+    /* 背面に表示 */
+}
+
+.thanks__button {
+    margin-top: 70px;
+    display: flex;
+    justify-content: center
+}
+
+button {
+    font-family: 'Inika', 'Noto Sans JP', sans-serif;
+    font-size: 18px;
+    width: 120px;
+    height: 50px;
+    line-height: 50px;
+    /* ボタンの高さと同じ */
+    border: none;
+    border-radius: 1px;
+    background: #82756A;
     color: #fff;
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 24px;
-}
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
 
-.thanks__content {
-    margin: 0 auto;
-    padding: 30px 15px;
-    max-width: 1230px;
-}
-
-.thanks__heading {
-    margin-bottom: 40px;
-    text-align: center;
 }
