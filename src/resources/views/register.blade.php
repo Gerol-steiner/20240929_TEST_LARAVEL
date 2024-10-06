@@ -39,7 +39,7 @@
                         </div>
                         <div class="form__group-content">
                             <div class="form__input--text">
-                                <input type="text" name="name" placeholder="例: 山田 太郎" />
+                                <input type="text" name="name" placeholder="例: 山田 太郎" value="{{ old('name') }}" />
                                 @if ($errors->has('name'))
                                     @foreach ($errors->get('name') as $error)
                                         <div class="error-message">{{ $error }}</div>
@@ -55,7 +55,7 @@
                         </div>
                         <div class="form__group-content">
                             <div class="form__input--text">
-                                <input type="email" name="email" placeholder="例: test@example.com" />
+                                <input type="email" name="email" placeholder="例: test@example.com" value="{{ old('email') }}" />
                                 @if ($errors->has('email'))
                                     @foreach ($errors->get('email') as $error)
                                         <div class="error-message">{{ $error }}</div>
@@ -71,7 +71,7 @@
                         </div>
                         <div class="form__group-content">
                             <div class="form__input--text">
-                                <input type="password" name="password" placeholder="例: coachtech1106" />
+                                <input type="password" name="password" placeholder="例: coachtech1106" value="{{ old('password') }}"/>
                                 @if ($errors->has('password'))
                                     @foreach ($errors->get('password') as $error)
                                         <div class="error-message">{{ $error }}</div>

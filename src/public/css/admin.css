@@ -70,7 +70,8 @@ body {
 }
 
 .thanks__heading {
-    margin-bottom: 15px;
+    margin-bottom: 40px;
+    margin-top: 20px;
     text-align: center;
 }
 
@@ -79,6 +80,8 @@ body {
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    margin-top: 15px;
+    margin-bottom: 15px;
 }
 
 .admin__group-table {
@@ -115,6 +118,60 @@ tr:last-child td {
     color:#8B7969;
     font-size: 14px;
     height: 100%;
+}
+
+.form__search-select select {
+        padding: 5px 12px;
+        width: 60%;
+        height: 30px;
+        border: 1px solid #ddd;
+        border-radius: 0px;
+        font-size: 14px;
+        font-weight: 100;
+        background-color: #F4F4F4;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        border-radius: 0px;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='8' viewBox='0 0 14 8'%3E%3Cpath fill='%23BEB1A6' d='M1 1l6 6 6-6'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 0.7em top 50%;
+        background-size: 1.3em auto;
+        padding-right: 1.5em;
+}
+
+.form__search-date-input {
+    padding: 5px 12px;
+    width: 100%;
+    height: 100%;
+    border: 1px solid #ddd;
+    border-radius: 0px;
+    font-size: 14px;
+    font-weight: 100;
+    background-color: #F4F4F4;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='8' viewBox='0 0 14 8'%3E%3Cpath fill='%23BEB1A6' d='M1 1l6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.7em center;
+    background-size: 1.3em auto;
+    padding-right: 1.5em;
+}
+
+.form__search-date-input::-webkit-calendar-picker-indicator {
+    opacity: 0;
+    -webkit-appearance: none;
+    cursor: pointer;
+    transform: translateX(12px);
+}
+
+.form__search-date-input::-moz-calendar-picker-indicator {
+    opacity: 0;
+    transform: translateX(12px);
+    -moz-appearance: none;
+    cursor: pointer;
 }
 
 
@@ -196,6 +253,7 @@ select[name="category_id"] {
 
 .pagination {
     display: flex;
+    border-radius: 0px;
     list-style: none;
     padding: 0;
     justify-content: center;
@@ -206,9 +264,10 @@ select[name="category_id"] {
 .pagination span {
     display: flex;
     font-size: 16px;
-    padding: 2px 10px;
+    padding: 8px 12px;
     /* ボタンのサイズ調整 */
     border: 1px solid #E0DFDE;
+    border-radius: 0px;
     /* 外枠 */
     text-decoration: none;
     color: #7a614d;

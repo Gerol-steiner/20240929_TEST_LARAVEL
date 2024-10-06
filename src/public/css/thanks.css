@@ -38,7 +38,7 @@ body {
 }
 
 .base-text {
-    font-size: 36px;
+    font-size: 32px;
     font-weight: 900;
     color: #8B7969;
     z-index: 1;
@@ -50,7 +50,7 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -60%);
-    font-size: 420px;
+    font-size: 350px;
     color: ##8B7969;
     pointer-events: none;  /* クリックを無効化（必要に応じて） */
     opacity: 0.05;
@@ -70,8 +70,8 @@ button {
     font-family: 'Inika', 'Noto Sans JP', sans-serif;
     font-size: 18px;
     width: 120px;
-    height: 50px;
-    line-height: 50px;
+    height: 40px;
+    line-height: 40px;
     /* ボタンの高さと同じ */
     border: none;
     border-radius: 1px;
